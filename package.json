@@ -9,9 +9,13 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "typecheck": "tsc -b",
-    "test": "vitest run",
+    "test": "vitest run --project unit",
     "test:watch": "vitest",
-    "check": "npm run lint && npm run typecheck && npm test && npm run build"
+    "check": "npm run lint && npm run typecheck && npm test && npm run build",
+    "test:db": "vitest run --project db",
+    "db:start": "supabase db start",
+    "db:reset": "supabase db reset",
+    "db:stop": "supabase stop"
   },
   "dependencies": {
     "react": "^19.2.8",
@@ -19,10 +23,13 @@
   },
   "devDependencies": {
     "@types/node": "^24.13.3",
+    "@types/pg": "^8.23.1",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
     "oxlint": "^1.81.0",
+    "pg": "^8.23.1",
+    "supabase": "^2.121.0",
     "typescript": "~6.0.2",
     "vite": "^8.3.0",
     "vitest": "^5.0.5"

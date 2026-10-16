@@ -17,6 +17,8 @@ Regra: uma decisão só entra em "Aprovadas" quando o Victor aprovar. Ao mudar a
 | 16/10/2026 | Ferramentas da base: oxlint (lint, padrão do template atual do Vite), Vitest (testes), TypeScript em modo `strict`. |
 | 16/10/2026 | Se uma integração for inviável, o cadastro manual cobre a mesma necessidade. |
 | 16/10/2026 | Fontes e cores da marca: Archivo (variável) e JetBrains Mono, self-hosted; azul `#233DFF`, creme `#F4EFE6`, preto `#000000`. Substituem os valores de referência do documento mestre. |
+| 16/10/2026 | Banco: Supabase CLI no projeto (versão fixa no `package.json`), migrações em `supabase/migrations`, tabelas com nomes em inglês como no planejamento. Testes de banco em Vitest + `pg` (em vez de pgTAP), para usar uma ferramenta só. Realtime, Storage e Analytics desligados no ambiente local. |
+| 16/10/2026 | Projeto Supabase de produção criado pelo Victor. As migrações só vão para ele depois de passar no CI e com aprovação. |
 
 ## Pendentes (não presumir)
 
