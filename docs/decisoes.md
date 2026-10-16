@@ -28,6 +28,13 @@ Regra: uma decisão só entra em "Aprovadas" quando o Victor aprovar. Ao mudar a
 
 ## Dependem de pesquisa
 
-- Moodle da Unicamp: verificar se é possível exportar o calendário (.ics).
+Moodle da Unicamp: **resolvido em 16/10/2026.** A exportação de calendário funciona (link .ics com token pessoal, Moodle 4.5). O feed testado trouxe 30 eventos entre 14/10 e 14/12/2026, com `UID`, `SUMMARY`, `DESCRIPTION`, `CATEGORIES`, `LAST-MODIFIED`, `DTSTART` e `DTEND` em UTC. Consequências para a importação:
+
+- Deduplicar pelo `UID` e só atualizar quando `LAST-MODIFIED` mudar.
+- O feed cobre uma janela de tempo (`recentupcoming`): evento que some de dentro da janela foi cancelado; evento que saiu da janela, não.
+- Prazos chegam como 03:00 UTC (meia-noite em Brasília): exibir no fuso do usuário e tratar meia-noite como "até o fim do dia anterior" quando for prazo de entrega.
+- O link equivale a uma senha: guardar só no servidor, criptografado, nunca em log nem no repositório.
+
+
 - Google Classroom e Google Calendar: verificação do app no Google e permissões da conta institucional.
 - Open Finance: custo e contrato do agregador.
