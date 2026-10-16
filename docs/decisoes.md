@@ -16,10 +16,11 @@ Regra: uma decisão só entra em "Aprovadas" quando o Victor aprovar. Ao mudar a
 | 16/10/2026 | Stack: React + TypeScript + Vite no front; Supabase (Postgres, Auth, RLS, funções, Edge Functions, `pg_cron`) no back-end; publicação na Cloudflare; CI no GitHub Actions. |
 | 16/10/2026 | Ferramentas da base: oxlint (lint, padrão do template atual do Vite), Vitest (testes), TypeScript em modo `strict`. |
 | 16/10/2026 | Se uma integração for inviável, o cadastro manual cobre a mesma necessidade. |
+| 16/10/2026 | Fontes e cores da marca: Archivo (variável) e JetBrains Mono, self-hosted; azul `#233DFF`, creme `#F4EFE6`, preto `#000000`. Substituem os valores de referência do documento mestre. |
 
 ## Pendentes (não presumir)
 
-- Fontes e cores finais do KOSMOS. Proposta: usar as da marca (Archivo, JetBrains Mono, `#233DFF`, `#F4EFE6`) em vez dos valores de referência do documento mestre.
+- Logo do KOSMOS: proposta em PNG (estrela de quatro pontas com órbita e ponto azul, no Project do Claude). Falta uma versão vetorial (SVG) sem brilho e sem degradê para ícone pequeno, e decidir o azul: a logo usa cerca de `#0852FD` a `#1D74FD`, diferente do `#233DFF` da marca. O `#1D74FD` tem contraste de 4,66:1 sobre o fundo quase preto e pode servir como o azul de texto no tema escuro.
 - Proposta visual completa (paleta final, variante clara do azul para o tema escuro, cores de estado, tipografia, navegação e dashboard), a ser validada antes de construir telas.
 - Biblioteca de datas com fuso: `Temporal` com polyfill ou `date-fns-tz`, a decidir com um teste na Fase 1.
 - Adoção de Tailwind v4, React Router, TanStack Query e Zod: recomendados na Fase 0, instalados só quando o item do backlog precisar deles.
