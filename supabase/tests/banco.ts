@@ -33,7 +33,8 @@ export async function criarUsuario(
   metadados: Record<string, unknown> = {},
 ): Promise<string> {
   const { rows } = await cliente.query<{ id: string }>(
-    'insert into auth.users (email, raw_user_meta_data) values ($1, $2) returning id',
+    // No Supabase, auth.users.id não tem valor padrão: o Auth gera o id.
+    'insert into auth.users (id, email, raw_user_meta_data) values (gen_random_uuid(), $1, $2) returning id',
     [email, JSON.stringify(metadados)],
   )
   const id = rows[0]?.id

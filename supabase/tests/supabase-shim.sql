@@ -30,7 +30,8 @@ $$;
 create schema if not exists auth;
 
 create table if not exists auth.users (
-  id                 uuid primary key default gen_random_uuid(),
+  -- sem valor padrão, como no Supabase: quem cria a conta informa o id
+  id                 uuid primary key,
   email              text unique,
   raw_user_meta_data jsonb not null default '{}'::jsonb,
   created_at         timestamptz not null default now()
