@@ -1,0 +1,38 @@
+name: Verificação
+
+# Roda em todo push e pull request. Se algum passo falhar, o commit aparece
+# com um X vermelho no GitHub e nada deve ser publicado a partir dele.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    # Versão do Ubuntu fixa: "ubuntu-latest" muda sozinho e pode quebrar o
+    # build sem nenhuma mudança no projeto. Atualizar de propósito.
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Tipos
+        run: npm run typecheck
+
+      - name: Testes
+        run: npm test
+
+      - name: Build
+        run: npm run build

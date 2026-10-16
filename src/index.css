@@ -1,0 +1,22 @@
+/* Estilo provisório. Os tokens do Design System substituem este arquivo no
+   item 5 do backlog. */
+:root {
+  font-family: system-ui, sans-serif;
+  color-scheme: dark light;
+}
+
+body {
+  margin: 0;
+}
+
+.provisorio {
+  min-height: 100dvh;
+  display: grid;
+  place-content: center;
+  padding: 16px;
+  text-align: center;
+}
+
+.nota {
+  opacity: 0.7;
+}
