@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { Session, SupabaseClient } from '@supabase/supabase-js'
+import Hoje from './agenda/Hoje.tsx'
 import Login from './auth/Login.tsx'
 import { MARCA } from './marca.ts'
 import { supabase } from './supabase.ts'
@@ -34,10 +35,24 @@ function ComSessao({ supabase }: { supabase: SupabaseClient }) {
         </button>
       </header>
       <main className="p-4">
-        <p className="text-muted">Você entrou como {sessao.user.email}.</p>
+        <Inicio supabase={supabase} />
       </main>
     </div>
   )
+}
+
+// Lê o fuso do perfil antes de montar as telas: "hoje" depende dele.
+function Inicio({ supabase }: { supabase: SupabaseClient }) {
+  const [fuso, setFuso] = useState<string | null>(null)
+  useEffect(() => {
+    supabase
+      .from('profiles')
+      .select('timezone')
+      .single()
+      .then(({ data }) => setFuso(data?.timezone ?? Intl.DateTimeFormat().resolvedOptions().timeZone))
+  }, [supabase])
+  if (!fuso) return <p className="text-muted">Carregando…</p>
+  return <Hoje supabase={supabase} fuso={fuso} />
 }
 
 const PROXIMO: Record<PreferenciaTema, PreferenciaTema> = { system: 'dark', dark: 'light', light: 'system' }
