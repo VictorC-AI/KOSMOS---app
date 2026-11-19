@@ -21,6 +21,9 @@ Regra: uma decisão só entra em "Aprovadas" quando o Victor aprovar. Ao mudar a
 | 18/11/2026 | Projeto Supabase de produção: ainda não criado (a informação de 16/10 estava errada). Será criado numa organização separada só para o app, na conta atual do Victor, para poder ser transferido depois. As migrações só vão para ele depois de passar no CI e com aprovação. |
 | 18/11/2026 | Mudança de foco: versão 0.1 usável o quanto antes (visual base, login, entregas, compromissos, hábitos, tela Hoje, calendário), melhorando com o uso. Moodle, notificações e Google Agenda ficam para depois da 0.1. |
 | 18/11/2026 | Tailwind v4 adotado, com tokens no `@theme` (`src/index.css`). Fontes via Fontsource (arquivos empacotados no build, sem Google Fonts). Nome e slogan em `src/marca.ts`. |
+| 18/11/2026 | Desenvolvimento da 0.1 contra o projeto Supabase na nuvem (sem Docker na máquina). Testes de banco rodam no CI. |
+| 18/11/2026 | Calendário com FullCalendar v6 (MIT; mês, semana, dia, arrastar). A v7 exige `temporal-polyfill`, o que anteciparia a decisão de datas; migrar depois fica restrito a `src/agenda/Calendario.tsx`. Carregado sob demanda para não pesar a tela Hoje. |
+| 18/11/2026 | Repositório limpo: ao fim de cada etapa, remover o que ficou sem uso (arquivos, CSS, dependências, scripts, trechos do README) e conferir `git status` antes de cada commit. |
 
 ## Pendentes (não presumir)
 

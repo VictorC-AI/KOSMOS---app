@@ -68,6 +68,35 @@ body {
   outline-offset: 2px;
 }
 
+/* FullCalendar com os tokens do tema */
+.fc {
+  --fc-border-color: var(--color-border);
+  --fc-page-bg-color: var(--color-bg);
+  --fc-neutral-bg-color: var(--color-surface);
+  --fc-today-bg-color: color-mix(in srgb, var(--color-accent) 14%, transparent);
+  --fc-now-indicator-color: var(--color-accent-text);
+  --fc-button-text-color: var(--color-text);
+  --fc-button-bg-color: var(--color-surface-raised);
+  --fc-button-border-color: var(--color-border);
+  --fc-button-hover-bg-color: var(--color-surface);
+  --fc-button-hover-border-color: var(--color-border);
+  --fc-button-active-bg-color: var(--color-accent);
+  --fc-button-active-border-color: var(--color-accent);
+}
+.fc .fc-toolbar {
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.fc .fc-toolbar-title {
+  font-size: 1.125rem;
+}
+.fc .fc-button {
+  min-height: 2.75rem;
+}
+.fc .fc-button-primary.fc-button-active {
+  color: var(--color-on-accent);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

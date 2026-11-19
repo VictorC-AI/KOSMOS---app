@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import type { Session, SupabaseClient } from '@supabase/supabase-js'
 import Hoje from './agenda/Hoje.tsx'
 import Login from './auth/Login.tsx'
@@ -6,6 +6,9 @@ import { MARCA } from './marca.ts'
 import { supabase } from './supabase.ts'
 import { aplicarTema, lerTema, type PreferenciaTema } from './tema.ts'
 import { botaoFantasma } from './ui.ts'
+
+// O calendário é pesado: só baixa quando a aba é aberta.
+const Calendario = lazy(() => import('./agenda/Calendario.tsx'))
 
 export default function App() {
   if (!supabase) return <SemConfiguracao />
@@ -51,8 +54,30 @@ function Inicio({ supabase }: { supabase: SupabaseClient }) {
       .single()
       .then(({ data }) => setFuso(data?.timezone ?? Intl.DateTimeFormat().resolvedOptions().timeZone))
   }, [supabase])
+  const [tela, setTela] = useState<'hoje' | 'calendario'>('hoje')
   if (!fuso) return <p className="text-muted">Carregando…</p>
-  return <Hoje supabase={supabase} fuso={fuso} />
+  const aba = (t: typeof tela, rotulo: string) => (
+    <button
+      aria-current={tela === t ? 'page' : undefined}
+      className={`min-h-11 rounded-lg px-4 text-sm ${tela === t ? 'bg-accent font-semibold text-on-accent' : 'text-muted hover:bg-surface-raised hover:text-text'}`}
+      onClick={() => setTela(t)}
+    >
+      {rotulo}
+    </button>
+  )
+  return (
+    <>
+      <nav className="mb-4 flex gap-1">
+        {aba('hoje', 'Hoje')}
+        {aba('calendario', 'Calendário')}
+      </nav>
+      {tela === 'hoje' ? <Hoje supabase={supabase} fuso={fuso} /> : (
+        <Suspense fallback={<p className="text-muted">Carregando calendário…</p>}>
+          <Calendario supabase={supabase} fuso={fuso} />
+        </Suspense>
+      )}
+    </>
+  )
 }
 
 const PROXIMO: Record<PreferenciaTema, PreferenciaTema> = { system: 'dark', dark: 'light', light: 'system' }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { diasEntre, hojeNoFuso, inicioDaSemana, ocorreEm, ocorrenciasEntre, prazo, somarDias } from './datas.ts'
+import { agoraNoFuso, diasEntre, hojeNoFuso, inicioDaSemana, ocorreEm, ocorrenciasEntre, prazo, somarDias } from './datas.ts'
 
 describe('hojeNoFuso', () => {
   it('perto da meia-noite, o dia depende do fuso', () => {
@@ -7,6 +7,10 @@ describe('hojeNoFuso', () => {
     const agora = new Date('2026-11-19T02:30:00Z')
     expect(hojeNoFuso('America/Sao_Paulo', agora)).toBe('2026-11-18')
     expect(hojeNoFuso('Europe/Lisbon', agora)).toBe('2026-11-19')
+  })
+
+  it('agoraNoFuso dá o relógio de parede do fuso', () => {
+    expect(agoraNoFuso('America/Sao_Paulo', new Date('2026-11-19T02:30:05Z'))).toBe('2026-11-18T23:30:05')
   })
 })
 

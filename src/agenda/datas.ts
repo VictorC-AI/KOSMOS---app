@@ -74,3 +74,9 @@ export function prazo(hoje: Dia, vencimento: Dia): { texto: string; urgente: boo
     n < -1 ? `atrasada ${-n} dias` : n === -1 ? 'atrasada 1 dia' : n === 0 ? 'vence hoje' : n === 1 ? 'vence amanhã' : `em ${n} dias`
   return { texto, urgente: n <= 3 }
 }
+
+/** Data e hora de agora no fuso, como 'AAAA-MM-DDTHH:MM:SS' (sem fuso no texto). */
+export function agoraNoFuso(fuso: string, agora: Date = new Date()): string {
+  // sv-SE formata como 'AAAA-MM-DD HH:MM:SS'
+  return new Intl.DateTimeFormat('sv-SE', { timeZone: fuso, dateStyle: 'short', timeStyle: 'medium' }).format(agora).replace(' ', 'T')
+}
