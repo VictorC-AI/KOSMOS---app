@@ -5,7 +5,7 @@ import { AdicionarCompromisso, AdicionarEntrega, AdicionarHabito } from './Adici
 import { hojeNoFuso, inicioDaSemana, ocorreEm, prazo } from './datas.ts'
 import type { Compromisso, Entrega, Habito, RegistroHabito } from './tipos.ts'
 
-interface Dados {
+export interface Dados {
   habitos: Habito[]
   registros: RegistroHabito[]
   compromissos: Compromisso[]
@@ -46,11 +46,25 @@ export default function Hoje({ supabase, fuso }: { supabase: SupabaseClient; fus
 
   if (erro && !dados) return <p role="alert" className="text-danger">{erro}</p>
   if (!dados) return <p className="text-muted">Carregando…</p>
+  return <PainelHoje supabase={supabase} fuso={fuso} hoje={hoje} dados={dados} erro={erro} agir={agir} aoSalvar={carregar} />
+}
 
+interface PropsPainel {
+  supabase: SupabaseClient
+  fuso: string
+  hoje: string
+  dados: Dados
+  erro: string | null
+  agir: (acao: PromiseLike<{ error: { message: string } | null }>) => void
+  aoSalvar: () => void
+}
+
+/** Só desenha: recebe os dados prontos (assim dá para testar sem banco). */
+export function PainelHoje({ supabase, fuso, hoje, dados, erro, agir, aoSalvar }: PropsPainel) {
   const doDia = dados.compromissos
     .filter((c) => ocorreEm(c, hoje))
     .sort((a, b) => a.start_time.localeCompare(b.start_time))
-  const props = { supabase, hoje, aoSalvar: carregar }
+  const props = { supabase, hoje, aoSalvar }
 
   return (
     <div className="grid gap-8">

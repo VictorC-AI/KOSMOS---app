@@ -2,7 +2,7 @@
 
 Seu universo, em ordem. Plataforma de organização pessoal que conecta agenda, tarefas, vida acadêmica e finanças.
 
-Estado atual: **Fase 1, fundação**. Ainda não há funcionalidades; esta base tem o app React, os testes e a verificação automática.
+Estado atual: **versão 0.1 em construção**: login, tela Hoje (hábitos, compromissos e entregas) e calendário.
 
 ## Rodar
 
@@ -39,8 +39,6 @@ npm run db:stop    # desliga
 ```
 
 Mudança no banco é sempre uma migração nova: `npx supabase migration new nome_curto`. Nunca altere tabelas à mão.
-
-Sem Docker, dá para rodar os testes num Postgres comum: aplique `supabase/tests/supabase-shim.sql`, depois as migrações, e rode `npm run test:db` com `DATABASE_URL` apontando para esse banco. Nunca aponte `DATABASE_URL` para o banco de produção.
 
 ## Onde está cada coisa
 
