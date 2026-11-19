@@ -22,6 +22,8 @@ Regra: uma decisão só entra em "Aprovadas" quando o Victor aprovar. Ao mudar a
 
 ## Pendentes (não presumir)
 
+- **Nome e identidade visual são provisórios (18/11/2026).** O Victor pretende fazer um rebranding depois que a primeira versão estiver em uso: o nome "KOSMOS" e a aparência devem mudar. Até lá, seguem o nome e o visual atuais. Consequência para o código: o nome do produto, a logo e as cores ficam centralizados (uma constante de marca e os tokens de tema), nunca espalhados pelo código, para a troca ser simples.
+
 - Logo do KOSMOS: proposta em PNG (estrela de quatro pontas com órbita e ponto azul, no Project do Claude). Falta uma versão vetorial (SVG) sem brilho e sem degradê para ícone pequeno, e decidir o azul: a logo usa cerca de `#0852FD` a `#1D74FD`, diferente do `#233DFF` da marca. O `#1D74FD` tem contraste de 4,66:1 sobre o fundo quase preto e pode servir como o azul de texto no tema escuro.
 - Proposta visual completa (paleta final, variante clara do azul para o tema escuro, cores de estado, tipografia, navegação e dashboard), a ser validada antes de construir telas.
 - Biblioteca de datas com fuso: `Temporal` com polyfill ou `date-fns-tz`, a decidir com um teste na Fase 1.
