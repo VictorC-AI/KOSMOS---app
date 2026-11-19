@@ -1,10 +1,73 @@
+import { useEffect, useState } from 'react'
+import type { Session, SupabaseClient } from '@supabase/supabase-js'
+import Login from './auth/Login.tsx'
 import { MARCA } from './marca.ts'
+import { supabase } from './supabase.ts'
+import { aplicarTema, lerTema, type PreferenciaTema } from './tema.ts'
+import { botaoFantasma } from './ui.ts'
 
 export default function App() {
+  if (!supabase) return <SemConfiguracao />
+  return <ComSessao supabase={supabase} />
+}
+
+function ComSessao({ supabase }: { supabase: SupabaseClient }) {
+  // undefined = ainda verificando; null = sem login
+  const [sessao, setSessao] = useState<Session | null | undefined>(undefined)
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => setSessao(data.session))
+    const { data } = supabase.auth.onAuthStateChange((_evento, s) => setSessao(s))
+    return () => data.subscription.unsubscribe()
+  }, [supabase])
+
+  if (sessao === undefined) return <p className="p-4 text-muted">{MARCA.nome} · carregando…</p>
+  if (!sessao) return <Login supabase={supabase} />
+
   return (
-    <main className="grid min-h-dvh place-content-center gap-2 p-4 text-center">
+    <div className="mx-auto min-h-dvh max-w-5xl">
+      <header className="flex items-center gap-2 border-b border-border px-4 py-2">
+        <span className="mr-auto font-bold tracking-tight">{MARCA.nome}</span>
+        <BotaoTema />
+        <button className={botaoFantasma} onClick={() => supabase.auth.signOut()}>
+          Sair
+        </button>
+      </header>
+      <main className="p-4">
+        <p className="text-muted">Você entrou como {sessao.user.email}.</p>
+      </main>
+    </div>
+  )
+}
+
+const PROXIMO: Record<PreferenciaTema, PreferenciaTema> = { system: 'dark', dark: 'light', light: 'system' }
+const ROTULO: Record<PreferenciaTema, string> = { system: 'Tema: sistema', dark: 'Tema: escuro', light: 'Tema: claro' }
+
+function BotaoTema() {
+  const [tema, setTema] = useState(lerTema)
+  return (
+    <button
+      className={botaoFantasma}
+      onClick={() => {
+        const novo = PROXIMO[tema]
+        aplicarTema(novo)
+        setTema(novo)
+      }}
+    >
+      {ROTULO[tema]}
+    </button>
+  )
+}
+
+function SemConfiguracao() {
+  return (
+    <main className="grid min-h-dvh place-content-center gap-2 p-4">
       <h1 className="text-3xl font-bold tracking-tight">{MARCA.nome}</h1>
-      <p className="text-muted">{MARCA.slogan}</p>
+      <p className="max-w-prose text-muted">
+        Falta configurar o Supabase: copie <code className="font-mono">.env.example</code> para{' '}
+        <code className="font-mono">.env.local</code>, preencha a URL e a chave publishable e reinicie o{' '}
+        <code className="font-mono">npm run dev</code>.
+      </p>
     </main>
   )
 }

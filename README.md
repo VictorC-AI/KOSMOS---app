@@ -13,6 +13,8 @@ npm install
 npm run dev      # abre em http://localhost:5173
 ```
 
+Antes, copie `.env.example` para `.env.local` e preencha a URL e a chave publishable do Supabase (nunca a `service_role`).
+
 ## Verificar
 
 ```bash
