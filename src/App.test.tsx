@@ -1,6 +1,7 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import App from './App.tsx'
+import { MARCA } from './marca.ts'
 
 // Teste de fumaça: garante que o app monta sem erro e que a infraestrutura de
 // testes funciona. Testes de lógica (datas, dinheiro, RLS) vêm nas próximas
@@ -8,6 +9,6 @@ import App from './App.tsx'
 describe('App', () => {
   it('mostra o nome do produto', () => {
     const html = renderToStaticMarkup(<App />)
-    expect(html).toContain('KOSMOS')
+    expect(html).toContain(MARCA.nome)
   })
 })

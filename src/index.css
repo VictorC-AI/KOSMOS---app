@@ -1,22 +1,78 @@
-/* Estilo provisório. Os tokens do Design System substituem este arquivo no
-   item 5 do backlog. */
+@import 'tailwindcss';
+@import '@fontsource-variable/archivo/wght.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/700.css';
+
+/* Tokens do KOSMOS. Componentes usam só estes nomes (bg-bg, text-muted,
+   bg-accent...), nunca hex direto. O tema escuro é o padrão; o claro
+   sobrescreve as mesmas variáveis em [data-theme='light'].
+   Contraste medido (WCAG): texto ≥ 4,5:1 sobre bg e surface nos dois temas.
+   Provisórios até a proposta visual: accent-text escuro (#6E8BFF, 6,8:1 no
+   preto), cores de estado e cores por tipo. */
+@theme {
+  --font-sans: 'Archivo Variable', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --color-*: initial;
+  --color-bg: #000000;
+  --color-surface: #111113;
+  --color-surface-raised: #1c1c1f;
+  --color-border: #3a3a40;
+  --color-text: #f4efe6;
+  --color-muted: #a39e95;
+  --color-on-accent: #ffffff;
+  --color-accent: #233dff;
+  --color-accent-hover: #3a52ff;
+  --color-accent-text: #6e8bff;
+  --color-focus: #6e8bff;
+  --color-warning: #f2b84b;
+  --color-danger: #ff7a6b;
+  --color-success: #5fc38f;
+  /* tipos no calendário: dessaturados, o azul fica para seleção */
+  --color-tipo-entrega: #e0b25c;
+  --color-tipo-compromisso: #6fb3b5;
+  --color-tipo-habito: #b39ddb;
+  --color-transparent: transparent;
+}
+
+:root[data-theme='light'] {
+  --color-bg: #f4efe6;
+  --color-surface: #fbf8f3;
+  --color-surface-raised: #ffffff;
+  --color-border: #d9d2c5;
+  --color-text: #000000;
+  --color-muted: #5c574f;
+  --color-accent-text: #233dff;
+  --color-focus: #233dff;
+  --color-warning: #9a5b00;
+  --color-danger: #b3261e;
+  --color-success: #1e7a4c;
+  --color-tipo-entrega: #8a5a00;
+  --color-tipo-compromisso: #2c7476;
+  --color-tipo-habito: #6b4fa0;
+}
+
 :root {
-  font-family: system-ui, sans-serif;
-  color-scheme: dark light;
+  color-scheme: dark;
+}
+:root[data-theme='light'] {
+  color-scheme: light;
 }
 
 body {
-  margin: 0;
+  @apply bg-bg font-sans text-text antialiased;
 }
 
-.provisorio {
-  min-height: 100dvh;
-  display: grid;
-  place-content: center;
-  padding: 16px;
-  text-align: center;
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
 }
 
-.nota {
-  opacity: 0.7;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
 }

@@ -19,6 +19,8 @@ Regra: uma decisão só entra em "Aprovadas" quando o Victor aprovar. Ao mudar a
 | 16/10/2026 | Fontes e cores da marca: Archivo (variável) e JetBrains Mono, self-hosted; azul `#233DFF`, creme `#F4EFE6`, preto `#000000`. Substituem os valores de referência do documento mestre. |
 | 16/10/2026 | Banco: Supabase CLI no projeto (versão fixa no `package.json`), migrações em `supabase/migrations`, tabelas com nomes em inglês como no planejamento. Testes de banco em Vitest + `pg` (em vez de pgTAP), para usar uma ferramenta só. Realtime, Storage e Analytics desligados no ambiente local. |
 | 18/11/2026 | Projeto Supabase de produção: ainda não criado (a informação de 16/10 estava errada). Será criado numa organização separada só para o app, na conta atual do Victor, para poder ser transferido depois. As migrações só vão para ele depois de passar no CI e com aprovação. |
+| 18/11/2026 | Mudança de foco: versão 0.1 usável o quanto antes (visual base, login, entregas, compromissos, hábitos, tela Hoje, calendário), melhorando com o uso. Moodle, notificações e Google Agenda ficam para depois da 0.1. |
+| 18/11/2026 | Tailwind v4 adotado, com tokens no `@theme` (`src/index.css`). Fontes via Fontsource (arquivos empacotados no build, sem Google Fonts). Nome e slogan em `src/marca.ts`. |
 
 ## Pendentes (não presumir)
 
@@ -27,7 +29,7 @@ Regra: uma decisão só entra em "Aprovadas" quando o Victor aprovar. Ao mudar a
 - Logo do KOSMOS: proposta em PNG (estrela de quatro pontas com órbita e ponto azul, no Project do Claude). Falta uma versão vetorial (SVG) sem brilho e sem degradê para ícone pequeno, e decidir o azul: a logo usa cerca de `#0852FD` a `#1D74FD`, diferente do `#233DFF` da marca. O `#1D74FD` tem contraste de 4,66:1 sobre o fundo quase preto e pode servir como o azul de texto no tema escuro.
 - Proposta visual completa (paleta final, variante clara do azul para o tema escuro, cores de estado, tipografia, navegação e dashboard), a ser validada antes de construir telas.
 - Biblioteca de datas com fuso: `Temporal` com polyfill ou `date-fns-tz`, a decidir com um teste na Fase 1.
-- Adoção de Tailwind v4, React Router, TanStack Query e Zod: recomendados na Fase 0, instalados só quando o item do backlog precisar deles.
+- Adoção de React Router, TanStack Query e Zod: recomendados na Fase 0, instalados só quando o item do backlog precisar deles.
 - Estrutura de pastas por módulo do produto, a definir quando surgir o primeiro módulo.
 
 ## Dependem de pesquisa
